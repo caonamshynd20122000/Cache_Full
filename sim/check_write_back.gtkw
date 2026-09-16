@@ -1,0 +1,143 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Fri Aug 14 08:16:13 2026
+[*]
+[dumpfile] "/data/namcv10/N-Way_Cache_modify/sim/dump.vcd"
+[dumpfile_mtime] "Fri Aug 14 07:14:33 2026"
+[dumpfile_size] 609013
+[savefile] "/data/namcv10/N-Way_Cache_modify/sim/check_write_back.gtkw"
+[timestart] 0
+[size] 1850 1016
+[pos] -51 -51
+*-20.000000 2340000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cache_system_top.
+[treeopen] cache_system_top.cache_inst.
+[treeopen] cache_system_top.cache_inst.d_array.
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[0].
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[0].data_array.
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[1].
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[1].data_array.
+[treeopen] cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.
+[sst_width] 320
+[signals_width] 344
+[sst_expanded] 1
+[sst_vpaned_height] 585
+@28
+cache_system_top.cache_inst.clk_h
+cache_system_top.cache_inst.clk_l
+@22
+cache_system_top.cache_inst.in_addr[31:0]
+cache_system_top.cache_inst.in_byteen[3:0]
+cache_system_top.cache_inst.in_data[31:0]
+@28
+cache_system_top.cache_inst.in_ready
+cache_system_top.cache_inst.in_valid
+cache_system_top.cache_inst.in_write
+cache_system_top.cache_inst.valid
+cache_system_top.cache_inst.cache_write_valid
+cache_system_top.cache_inst.cache_write_valid_r
+@22
+cache_system_top.cache_inst.arr_data[31:0]
+cache_system_top.cache_inst.evict_data_buffer[31:0]
+cache_system_top.cache_inst.cache_write_data_selected[31:0]
+@800022
+cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+@28
+(0)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(1)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(2)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(3)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(4)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(5)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(6)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(7)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(8)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(9)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(10)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(11)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(12)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(13)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(14)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+(15)cache_system_top.cache_inst.tag_array.dirty_reg[0][15:0]
+cache_system_top.cache_inst.tag_array.cur_state[1:0]
+cache_system_top.dram_inst.write_valid
+@22
+cache_system_top.dram_inst.write_addr[31:0]
+cache_system_top.dram_inst.write_data[31:0]
+@1001200
+-group_end
+@22
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[0][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[1][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[2][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[3][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[4][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[5][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[6][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[7][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[8][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[9][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[10][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[11][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[12][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[13][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[14][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[15][31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.INIT_FILE[7:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_DEPTH[31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_PERFORMANCE[87:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_WIDTH[31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.addra[3:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.clka
+@22
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.dina[31:0]
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.douta[31:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.ena
+@22
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.ram_data[31:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.regcea
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.rsta
+@22
+cache_system_top.cache_inst.d_array.genblk4[0].data_array.genblk1.xilinx_single_port_ram_no_change.wea[3:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[0][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[1][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[2][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[3][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[4][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[5][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[6][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[7][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[8][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[9][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[10][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[11][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[12][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[13][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[14][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.BRAM[15][31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.INIT_FILE[7:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_DEPTH[31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_PERFORMANCE[87:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.RAM_WIDTH[31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.addra[3:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.clka
+@22
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.dina[31:0]
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.douta[31:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.ena
+@22
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.ram_data[31:0]
+@28
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.regcea
+@29
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.rsta
+@22
+cache_system_top.cache_inst.d_array.genblk4[1].data_array.genblk1.xilinx_single_port_ram_no_change.wea[3:0]
+[pattern_trace] 1
+[pattern_trace] 0

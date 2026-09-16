@@ -1,0 +1,77 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Aug  3 07:56:02 2026
+[*]
+[dumpfile] "/data/namcv10/N-Way_Cache_modify/sim/dump.vcd"
+[dumpfile_mtime] "Mon Aug  3 04:18:07 2026"
+[dumpfile_size] 10399810
+[savefile] "/data/namcv10/N-Way_Cache_modify/sim/check_signal.gtkw"
+[timestart] 0
+[size] 1850 1016
+[pos] -51 -51
+*-17.000000 170000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cache_system_top.
+[treeopen] cache_system_top.cache_inst.
+[treeopen] cache_system_top.cache_inst.d_array.
+[treeopen] cache_system_top.cache_inst.rd_controller.
+[treeopen] cache_system_top.cache_inst.wr_controller.
+[treeopen] cache_system_top.dram_inst.
+[sst_width] 283
+[signals_width] 194
+[sst_expanded] 1
+[sst_vpaned_height] 296
+@28
+cache_system_top.cache_inst.clk_h
+cache_system_top.clk_l
+cache_system_top.cache_inst.rst_n
+cache_system_top.cache_inst.in_valid
+cache_system_top.cache_inst.in_write
+cache_system_top.cache_inst.c_fsm.in_ready
+@22
+cache_system_top.cache_inst.in_addr[31:0]
+@28
+cache_system_top.cache_inst.c_fsm.fw_valid
+@22
+cache_system_top.cache_inst.c_fsm.fw_addr[31:0]
+@28
+cache_system_top.cache_inst.out_valid
+@22
+cache_system_top.cache_inst.out_data[31:0]
+@28
+[color] 1
+cache_system_top.cache_inst.c_fsm.cur_state
+cache_system_top.cache_inst.rd_controller.cur_state
+[color] 1
+cache_system_top.cache_inst.fsm_hit
+@22
+[color] 1
+cache_system_top.cache_inst.c_fsm.addr_keep[31:0]
+@28
+[color] 2
+cache_system_top.cache_inst.f_unit.cur_state[1:0]
+@22
+[color] 2
+cache_system_top.cache_inst.f_unit.prev_addr[31:0]
+@28
+[color] 2
+cache_system_top.cache_inst.tag_array.cur_state[1:0]
+cache_system_top.dram_inst.read_valid
+cache_system_top.dram_inst.read_ready
+@22
+cache_system_top.dram_inst.read_addr[31:0]
+cache_system_top.dram_inst.read_data[31:0]
+@28
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.clk
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.rst_n
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.counter[0]
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.done
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.done_w
+[color] 2
+cache_system_top.cache_inst.rd_controller.counter_offset_inst.start
+[pattern_trace] 1
+[pattern_trace] 0

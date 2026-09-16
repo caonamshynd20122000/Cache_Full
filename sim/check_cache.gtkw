@@ -1,0 +1,151 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Tue Aug  4 09:16:57 2026
+[*]
+[dumpfile] "/data/namcv10/N-Way_Cache_modify/sim/dump.vcd"
+[dumpfile_mtime] "Tue Aug  4 08:34:24 2026"
+[dumpfile_size] 218792
+[savefile] "/data/namcv10/N-Way_Cache_modify/sim/check_cache.gtkw"
+[timestart] 0
+[size] 1850 1016
+[pos] -51 -51
+*-18.000000 80000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cache_system_top.
+[treeopen] cache_system_top.cache_inst.
+[sst_width] 235
+[signals_width] 254
+[sst_expanded] 1
+[sst_vpaned_height] 467
+@28
+cache_system_top.clk_h
+cache_system_top.clk_l
+cache_system_top.rst_n
+@22
+[color] 2
+cache_system_top.cfg_addr[7:0]
+[color] 2
+cache_system_top.cfg_data_in[31:0]
+[color] 2
+cache_system_top.cfg_data_out[31:0]
+@28
+[color] 2
+cache_system_top.cfg_ready
+[color] 2
+cache_system_top.cfg_valid
+cache_system_top.cache_inst.fsm_way[1:0]
+@22
+cache_system_top.in_addr[31:0]
+cache_system_top.in_data[31:0]
+@28
+cache_system_top.in_ready
+cache_system_top.in_valid
+cache_system_top.in_write
+cache_system_top.cache_inst.out_valid
+@22
+cache_system_top.cache_inst.out_data[31:0]
+@28
+cache_system_top.cache_inst.fw_valid
+@22
+cache_system_top.cache_inst.fw_addr[31:0]
+@28
+[color] 1
+cache_system_top.cache_inst.fw_rw
+[color] 1
+cache_system_top.cache_inst.tag_array.fsm_hit
+[color] 1
+cache_system_top.cache_inst.tag_array.write_valid
+[color] 1
+cache_system_top.cache_inst.tag_array.write_through
+@22
+[color] 1
+cache_system_top.cache_inst.tag_array.write_addr[31:0]
+[color] 1
+cache_system_top.cache_inst.tag_array.write_data[31:0]
+@28
+cache_system_top.cache_inst.wr_controller.mem_write_valid
+[color] 2
+cache_system_top.dram_inst.clk
+[color] 2
+cache_system_top.dram_inst.rst_n
+[color] 2
+cache_system_top.dram_inst.write_valid
+[color] 2
+cache_system_top.dram_inst.write_ready
+@22
+[color] 2
+cache_system_top.dram_inst.write_addr[31:0]
+[color] 2
+cache_system_top.dram_inst.write_data[31:0]
+[color] 2
+cache_system_top.dram_inst.r_addr[15:0]
+[color] 2
+cache_system_top.dram_inst.read_addr[31:0]
+[color] 2
+cache_system_top.dram_inst.read_data[31:0]
+@28
+[color] 2
+cache_system_top.dram_inst.read_ready
+[color] 2
+cache_system_top.dram_inst.read_valid
+@23
+[color] 2
+cache_system_top.dram_inst.w_addr[15:0]
+@22
+cache_system_top.cache_inst.tag_array.addr_keep[31:0]
+cache_system_top.cache_inst.tag_array.arr_addr[31:0]
+cache_system_top.cache_inst.tag_array.arr_in_data[31:0]
+cache_system_top.cache_inst.tag_array.arr_out_data[31:0]
+@28
+cache_system_top.cache_inst.tag_array.arr_ready
+cache_system_top.cache_inst.tag_array.arr_valid
+cache_system_top.cache_inst.tag_array.arr_write
+cache_system_top.cache_inst.tag_array.clk
+cache_system_top.cache_inst.tag_array.cur_state[1:0]
+@22
+cache_system_top.cache_inst.tag_array.cur_vld[3:0]
+cache_system_top.cache_inst.tag_array.data_keep[31:0]
+cache_system_top.cache_inst.tag_array.en[3:0]
+@28
+cache_system_top.cache_inst.tag_array.fetch_done
+cache_system_top.cache_inst.tag_array.fsm_accessed
+@22
+cache_system_top.cache_inst.tag_array.fsm_addr[31:0]
+cache_system_top.cache_inst.tag_array.fsm_data[31:0]
+@28
+cache_system_top.cache_inst.tag_array.fsm_hit
+cache_system_top.cache_inst.tag_array.fsm_ready
+cache_system_top.cache_inst.tag_array.fsm_valid
+cache_system_top.cache_inst.tag_array.fsm_way[1:0]
+cache_system_top.cache_inst.tag_array.fsm_write
+@22
+cache_system_top.cache_inst.tag_array.l[31:0]
+@28
+cache_system_top.cache_inst.tag_array.next_MRU[1:0]
+cache_system_top.cache_inst.tag_array.next_state[1:0]
+cache_system_top.cache_inst.tag_array.rst_n
+cache_system_top.cache_inst.tag_array.tag_access_done
+@22
+cache_system_top.cache_inst.tag_array.tag_data[0][31:8]
+cache_system_top.cache_inst.tag_array.tag_data[1][31:8]
+cache_system_top.cache_inst.tag_array.tag_data[2][31:8]
+cache_system_top.cache_inst.tag_array.tag_data[3][31:8]
+@28
+cache_system_top.cache_inst.tag_array.way[1:0]
+@22
+cache_system_top.cache_inst.tag_array.way_hit[3:0]
+@28
+cache_system_top.cache_inst.tag_array.way_hit_idx[1:0]
+cache_system_top.cache_inst.tag_array.way_keep[1:0]
+cache_system_top.cache_inst.tag_array.way_vld[1:0]
+@22
+cache_system_top.cache_inst.tag_array.wren[3:0]
+cache_system_top.cache_inst.tag_array.write_addr[31:0]
+cache_system_top.cache_inst.tag_array.write_data[31:0]
+@28
+cache_system_top.cache_inst.tag_array.write_keep
+cache_system_top.cache_inst.tag_array.write_ready
+cache_system_top.cache_inst.tag_array.write_strb[0]
+cache_system_top.cache_inst.tag_array.write_through
+cache_system_top.cache_inst.tag_array.write_valid
+[pattern_trace] 1
+[pattern_trace] 0

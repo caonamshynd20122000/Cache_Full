@@ -1,0 +1,58 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/data/namcv10/N-Way_Cache_modify/sim'
+mkdir -p sim_build
+/usr/local/bin/verilator -cc --exe -Mdir sim_build --top-module tl_mshr --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator" -Wno-fatal --timing --trace --trace-structs -DMULTIWAY ../rtl_2/tilelinkC/tl_pkg.sv ../rtl_2/priority_encoder.v ../rtl_2/tilelinkC/tl_mshr.sv /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+- V e r i l a t i o n   R e p o r t: Verilator 5.036 2025-04-27 rev v5.036
+- Verilator: Built from 0.065 MB sources in 5 modules, into 0.180 MB in 13 C++ files needing 0.000 MB
+- Verilator: Walltime 0.011 s (elab=0.001, cvt=0.006, bld=0.000); cpu 0.011 s on 1 threads; alloced 10.066 MB
+make -C sim_build  -f Vtop.mk
+make[2]: Entering directory '/data/namcv10/N-Way_Cache_modify/sim/sim_build'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /usr/local/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vcd_c.o /usr/local/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+python3 /usr/local/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtop.cpp Vtop___024root__DepSet_h84412442__0.cpp Vtop___024root__DepSet_heccd7ead__0.cpp Vtop__Dpi.cpp Vtop__Trace__0.cpp Vtop___024root__Slow.cpp Vtop___024root__DepSet_h84412442__0__Slow.cpp Vtop___024root__DepSet_heccd7ead__0__Slow.cpp Vtop_tl_pkg__Slow.cpp Vtop_tl_pkg__DepSet_h1525744d__0__Slow.cpp Vtop__Syms.cpp Vtop__Trace__0__Slow.cpp Vtop__TraceDecls__0__Slow.cpp > Vtop__ALL.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o Vtop__ALL.o Vtop__ALL.cpp
+echo "" > Vtop__ALL.verilator_deplist.tmp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[2]: Leaving directory '/data/namcv10/N-Way_Cache_modify/sim/sim_build'
+/usr/local/lib/python3.10/dist-packages/cocotb_tools/makefiles/simulators/Makefile.verilator:69: Using MODULE is deprecated, please use COCOTB_TEST_MODULES instead.
+rm -f results.xml
+COCOTB_TEST_MODULES=test_tl_mshr_unit COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=tl_mshr TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  -Wno-fatal --timing --trace --trace-structs -DMULTIWAY   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.10.14 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.036 2025-04-27
+     0.00ns INFO     cocotb                             Seeding Python random module with 1789030941
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /usr/local/lib/python3.10/dist-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_tl_mshr_unit.test_mshr_hit_early_release (1/3)
+                                                            Verify that a Cache HIT immediately releases the allocated MSHR slot in 1 cycle.
+    40.00ns INFO     cocotb.tl_mshr                     --> [TEST 1] Verifying Hit Early Release (Pre-alloc & Free)
+    90.00ns INFO     cocotb.tl_mshr                         PASSED: Slot was cleanly freed upon HIT without waiting for DRAM!
+    90.00ns INFO     cocotb.regression                  test_tl_mshr_unit.test_mshr_hit_early_release passed
+    90.00ns INFO     cocotb.regression                  running test_tl_mshr_unit.test_mshr_miss_persistence (2/3)
+                                                            Verify that a Cache MISS keeps the slot allocated in valid_table.
+   130.00ns INFO     cocotb.tl_mshr                     --> [TEST 2] Verifying Miss Persistence in MSHR Table
+   210.00ns INFO     cocotb.tl_mshr                         PASSED: Miss entry persisted in MSHR table as expected.
+   210.00ns INFO     cocotb.regression                  test_tl_mshr_unit.test_mshr_miss_persistence passed
+   210.00ns INFO     cocotb.regression                  running test_tl_mshr_unit.test_mshr_coalescing_and_fill_dequeue (3/3)
+                                                            Verify linking two misses to the same 64B line, followed by sequential dequeue on fill.
+   250.00ns INFO     cocotb.tl_mshr                     --> [TEST 3] Verifying Miss Coalescing & Sequential Dequeue
+   360.00ns INFO     cocotb.tl_mshr                         PASSED: Coalescing and sequential linked-list dequeue verified 100%!
+   360.00ns INFO     cocotb.regression                  test_tl_mshr_unit.test_mshr_coalescing_and_fill_dequeue passed
+   360.00ns INFO     cocotb.regression                  *****************************************************************************************************************
+                                                        ** TEST                                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *****************************************************************************************************************
+                                                        ** test_tl_mshr_unit.test_mshr_hit_early_release             PASS          90.00           0.00     161872.80  **
+                                                        ** test_tl_mshr_unit.test_mshr_miss_persistence              PASS         120.00           0.00     364194.27  **
+                                                        ** test_tl_mshr_unit.test_mshr_coalescing_and_fill_dequeue   PASS         150.00           0.00     357063.34  **
+                                                        *****************************************************************************************************************
+                                                        ** TESTS=3 PASS=3 FAIL=0 SKIP=0                                           360.00           0.01      68753.20  **
+                                                        *****************************************************************************************************************
+- :0: Verilog $finish
+make[1]: Leaving directory '/data/namcv10/N-Way_Cache_modify/sim'

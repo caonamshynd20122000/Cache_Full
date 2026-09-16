@@ -1,0 +1,306 @@
+rm -f results.xml
+"make" -f Makefile results.xml
+make[1]: Entering directory '/data/namcv10/N-Way_Cache_modify/sim'
+mkdir -p sim_build
+/usr/local/bin/verilator -cc --exe -Mdir sim_build --top-module cache_system_tl_top --timescale 1ns/1ps --vpi --public-flat-rw --prefix Vtop -o Vtop -LDFLAGS "-Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator" -Wno-fatal --timing --trace --trace-structs -GNUM_WAYS=16 -DMULTIWAY ../rtl_2/tilelinkC/tl_pkg.sv ../rtl_2/tilelinkC/tl_adapter.sv ../rtl_2/tilelinkC/cache_system_tl_top.sv ../rtl_2/D_FF.v ../rtl_2/OR_gate.v ../rtl_2/PRNG.v ../rtl_2/ad_edge_detect.v ../rtl_2/cache_controller.v ../rtl_2/cam.v ../rtl_2/cam_bram.v ../rtl_2/cam_srl.v ../rtl_2/counter_offset.v ../rtl_2/data_array.v ../rtl_2/fifo.v ../rtl_2/fsm.v ../rtl_2/main_memory_bram.v ../rtl_2/mem_model.v ../rtl_2/priority_encoder.v ../rtl_2/ram_dp.v ../rtl_2/random_fill_engine.v ../rtl_2/read_controller.v ../rtl_2/register_file.v ../rtl_2/request_translator.v ../rtl_2/secure_address_translator.v ../rtl_2/tag_array.v ../rtl_2/write_controller.v ../rtl_2/xilinx_single_port_ram_no_change.v ../rtl_2/fetch_unit.sv /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+%Warning-IMPLICIT: ../rtl_2/cache_controller.v:95:58: Signal definition not found, creating implicitly: 'load'
+   95 |                  .load                                  (load));
+      |                                                          ^~~~
+                   ... For warning description see https://verilator.org/warn/IMPLICIT?v=5.036
+                   ... Use "/* verilator lint_off IMPLICIT */" and lint_on around source to disable this message.
+%Warning-IMPLICIT: ../rtl_2/cache_controller.v:228:58: Signal definition not found, creating implicitly: 'fsm_hit'
+  228 |                          .cache_hit                     (fsm_hit),
+      |                                                          ^~~~~~~
+%Warning-ASCRANGE: ../rtl_2/ram_dp.v:18:17: Ascending bit range vector: left < right of bit range: [-1:0]
+                                          : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit.tag_buffer..genblk1.cam_inst.slice[0].ram_inst'
+   18 |     input  wire [(DATA_WIDTH/8)-1 : 0] b_we,
+      |                 ^
+                   ... For warning description see https://verilator.org/warn/ASCRANGE?v=5.036
+                   ... Use "/* verilator lint_off ASCRANGE */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: ../rtl_2/cam_bram.v:117:14: Input port connection 'b_we' expects 2 bits on the pin connection, but pin connection's VARREF 'wr_en' generates 1 bits.
+                                                : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit.tag_buffer..genblk1.cam_inst'
+  117 |             .b_we(wr_en),
+      |              ^~~~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.036
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: ../rtl_2/random_fill_engine.v:19:63: Operator AND expects 32 bits on the LHS, but LHS's VARREF 'rng_val' generates 4 bits.
+                                                         : ... note: In instance 'cache_system_tl_top.cache_inst.sec_address_translator.rand_fill_engine'
+   19 | wire signed [ADDR_SIZE-1 : 0]   add_addr    = addr + (rng_val & high_bound);
+      |                                                               ^
+%Warning-WIDTHEXPAND: ../rtl_2/random_fill_engine.v:19:63: Operator AND expects 32 bits on the RHS, but RHS's VARREF 'high_bound' generates 4 bits.
+                                                         : ... note: In instance 'cache_system_tl_top.cache_inst.sec_address_translator.rand_fill_engine'
+   19 | wire signed [ADDR_SIZE-1 : 0]   add_addr    = addr + (rng_val & high_bound);
+      |                                                               ^
+%Warning-WIDTHEXPAND: ../rtl_2/random_fill_engine.v:20:56: Operator ADD expects 32 bits on the RHS, but RHS's VARREF 'low_bound' generates 4 bits.
+                                                         : ... note: In instance 'cache_system_tl_top.cache_inst.sec_address_translator.rand_fill_engine'
+   20 | wire signed [ADDR_SIZE-1 : 0]   cal_addr    = add_addr + low_bound;
+      |                                                        ^
+%Warning-WIDTHEXPAND: ../rtl_2/counter_offset.v:16:67: Operator ADD expects 32 or 3 bits on the RHS, but RHS's VARREF 'start' generates 1 bits.
+                                                     : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit.genblk1[3].stream_counter'
+   16 |     counter <= (rst_n == 1'b0) ? 0 : (done_w) ? counter : counter + start;
+      |                                                                   ^
+%Warning-ASCRANGE: ../rtl_2/OR_gate.v:15:7: Ascending bit range vector: left < right of bit range: [0:3]
+                                          : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit.empty_tracker'
+   15 | logic [0 : SIZE-1] sig_processed;
+      |       ^
+%Warning-WIDTHEXPAND: ../rtl_2/counter_offset.v:13:24: Operator EQ expects 32 bits on the LHS, but LHS's VARREF 'counter' generates 5 bits.
+                                                     : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller.counter_offset_inst'
+   13 | wire done_w = (counter == COUNT_LIMIT) && start;
+      |                        ^~
+%Warning-WIDTHEXPAND: ../rtl_2/counter_offset.v:16:67: Operator ADD expects 32 or 5 bits on the RHS, but RHS's VARREF 'start' generates 1 bits.
+                                                     : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller.counter_offset_inst'
+   16 |     counter <= (rst_n == 1'b0) ? 0 : (done_w) ? counter : counter + start;
+      |                                                                   ^
+%Warning-WIDTHEXPAND: ../rtl_2/tag_array.v:113:22: Input port connection 'wren' expects 2 bits on the pin connection, but pin connection's SEL generates 1 bits.
+                                                 : ... note: In instance 'cache_system_tl_top.cache_inst.tag_array'
+  113 |                     .wren           (wren[k]),
+      |                      ^~~~
+%Warning-WIDTHEXPAND: ../rtl_2/tag_array.v:138:102: Operator ADD expects 32 bits on the LHS, but LHS's ARRAYSEL generates 4 bits.
+                                                  : ... note: In instance 'cache_system_tl_top.cache_inst.tag_array'
+  138 | assign  next_MRU        = (NUM_WAYS > 1) ? (MRU[addr_keep[_LINE_BITS+_OFFSET_BITS-1 : _OFFSET_BITS]] + 1'b1) % NUM_WAYS : 0;
+      |                                                                                                      ^
+%Warning-WIDTHTRUNC: ../rtl_2/tag_array.v:138:25: Operator ASSIGNW expects 4 bits on the Assign RHS, but Assign RHS's COND generates 32 bits.
+                                                : ... note: In instance 'cache_system_tl_top.cache_inst.tag_array'
+  138 | assign  next_MRU        = (NUM_WAYS > 1) ? (MRU[addr_keep[_LINE_BITS+_OFFSET_BITS-1 : _OFFSET_BITS]] + 1'b1) % NUM_WAYS : 0;
+      |                         ^
+                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.036
+                     ... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: ../rtl_2/tag_array.v:250:84: Operator ADD expects 32 or 6 bits on the LHS, but LHS's SEL generates 4 bits.
+                                                 : ... note: In instance 'cache_system_tl_top.cache_inst.tag_array'
+  250 |                             write_data[(addr_keep[_OFFSET_BITS-1 -: _TRANSFER_BITS]+1)*DATA_SIZE-1 -: DATA_SIZE] = data_keep;
+      |                                                                                    ^
+%Warning-WIDTHEXPAND: ../rtl_2/tag_array.v:259:84: Operator ADD expects 32 or 6 bits on the LHS, but LHS's SEL generates 4 bits.
+                                                 : ... note: In instance 'cache_system_tl_top.cache_inst.tag_array'
+  259 |                             write_data[(addr_keep[_OFFSET_BITS-1 -: _TRANSFER_BITS]+1)*DATA_SIZE-1 -: DATA_SIZE] = data_keep;
+      |                                                                                    ^
+%Warning-WIDTHEXPAND: ../rtl_2/fsm.v:127:89: Operator ADD expects 32 or 6 bits on the LHS, but LHS's SEL generates 4 bits.
+                                           : ... note: In instance 'cache_system_tl_top.cache_inst.c_fsm'
+  127 |                         out_data  = ib_data[(addr_keep[_OFFSET_BITS-1 -: _TRANSFER_BITS]+1)*DATA_SIZE-1 -: DATA_SIZE];
+      |                                                                                         ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:65:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   65 | lifetime_t [0 : SIZE-1]                  lifetime;
+      |            ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:66:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   66 | lifetime_t [0 : SIZE-1]                  lifetime_p;
+      |            ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:67:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   67 | logic      [0 : SIZE-1]                  refresh;
+      |            ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:68:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   68 | logic      [0 : SIZE-1]                  start;
+      |            ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:69:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   69 | logic      [0 : SIZE-1]                  hit;
+      |            ^
+%Warning-ASCRANGE: ../rtl_2/fetch_unit.sv:70:12: Ascending bit range vector: left < right of bit range: [0:3]
+                                               : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+   70 | logic      [0 : SIZE-1]                  allocate;
+      |            ^
+%Warning-WIDTHEXPAND: ../rtl_2/fetch_unit.sv:143:26: Output port connection 'counter' expects 3 bits on the pin connection, but pin connection's SEL generates 2 bits.
+                                                   : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+  143 |                         .counter        (lifetime_p[i]),
+      |                          ^~~~~~~
+%Warning-WIDTHTRUNC: ../rtl_2/fetch_unit.sv:222:27: Output port connection 'counter' expects 1 bits on the pin connection, but pin connection's VARREF 'rd_mem' generates 2 bits.
+                                                  : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+  222 |                          .counter       (rd_mem),
+      |                           ^~~~~~~
+%Warning-WIDTHEXPAND: ../rtl_2/fetch_unit.sv:244:27: Output port connection 'counter' expects 2 bits on the pin connection, but pin connection's VARREF 'wr_cam' generates 1 bits.
+                                                   : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+  244 |                          .counter       (wr_cam),
+      |                           ^~~~~~~
+%Warning-WIDTHEXPAND: ../rtl_2/fetch_unit.sv:258:15: Input port connection 'wren' expects 64 bits on the pin connection, but pin connection's VARREF 'wren' generates 1 bits.
+                                                   : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+  258 |              .wren     (wren),
+      |               ^~~~
+%Warning-WIDTHEXPAND: ../rtl_2/fetch_unit.sv:419:34: Operator EQ expects 32 bits on the RHS, but RHS's SEL generates 4 bits.
+                                                   : ... note: In instance 'cache_system_tl_top.cache_inst.f_unit'
+  419 |                             if(j == prev_addr[_OFFSET_BITS-1 : $clog2(DATA_SIZE/8)]) begin
+      |                                  ^~
+%Warning-WIDTHEXPAND: ../rtl_2/write_controller.v:76:22: Output port connection 'counter' expects 5 bits on the pin connection, but pin connection's VARREF 'counter_wire' generates 4 bits.
+                                                       : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller'
+   76 |                     .counter            (counter_wire),
+      |                      ^~~~~~~
+%Warning-WIDTHEXPAND: ../rtl_2/write_controller.v:89:138: Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'counter_wire' generates 4 bits.
+                                                        : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller'
+   89 | assign mem_write_addr  = (counter_done) | (!write_all && counter_wire == 1) ? 0 : (cur_state == STATE_BUSY) ? addr_i_reg + (counter_wire << $clog2(DATA_SIZE/8)) : 0;
+      |                                                                                                                                          ^~
+%Warning-WIDTHEXPAND: ../rtl_2/write_controller.v:91:152: Operator ADD expects 32 or 6 bits on the LHS, but LHS's VARREF 'counter_wire' generates 4 bits.
+                                                        : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller'
+   91 | assign mem_write_data  = (counter_done) | (!write_all && counter_wire == 1) ? 0 : (cur_state == STATE_BUSY) ? (write_all) ? data_in_i_reg[(counter_wire+1)*DATA_SIZE-1 -: DATA_SIZE] : data_in_i_reg[(addr_i_reg[_OFFSET_BITS-1 -: _TRANSFER_BITS]+1)*DATA_SIZE-1 -: DATA_SIZE] : 0;
+      |                                                                                                                                                        ^
+%Warning-WIDTHEXPAND: ../rtl_2/write_controller.v:91:243: Operator ADD expects 32 or 6 bits on the LHS, but LHS's SEL generates 4 bits.
+                                                        : ... note: In instance 'cache_system_tl_top.cache_inst.wr_controller'
+   91 | assign mem_write_data  = (counter_done) | (!write_all && counter_wire == 1) ? 0 : (cur_state == STATE_BUSY) ? (write_all) ? data_in_i_reg[(counter_wire+1)*DATA_SIZE-1 -: DATA_SIZE] : data_in_i_reg[(addr_i_reg[_OFFSET_BITS-1 -: _TRANSFER_BITS]+1)*DATA_SIZE-1 -: DATA_SIZE] : 0;
+      |                                                                                                                                                                                                                                                   ^
+%Warning-WIDTHEXPAND: ../rtl_2/read_controller.v:56:22: Output port connection 'counter' expects 5 bits on the pin connection, but pin connection's VARREF 'counter_wire' generates 4 bits.
+                                                      : ... note: In instance 'cache_system_tl_top.cache_inst.rd_controller'
+   56 |                     .counter            (counter_wire),
+      |                      ^~~~~~~
+%Warning-WIDTHEXPAND: ../rtl_2/read_controller.v:76:27: Operator EQ expects 32 or 7 bits on the LHS, but LHS's VARREF 'data_slot_idx' generates 4 bits.
+                                                      : ... note: In instance 'cache_system_tl_top.cache_inst.rd_controller'
+   76 |         if (data_slot_idx == _COUNT_LIMIT && mem_read_done)
+      |                           ^~
+%Warning-WIDTHEXPAND: ../rtl_2/read_controller.v:114:62: Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'counter_wire' generates 4 bits.
+                                                       : ... note: In instance 'cache_system_tl_top.cache_inst.rd_controller'
+  114 |             mem_read_o_addr     = addr_i_reg + (counter_wire << ($clog2(DATA_SIZE/8)));
+      |                                                              ^~
+%Warning-WIDTHTRUNC: ../rtl_2/cache_controller.v:82:19: Input port connection 'in_addr' expects 6 bits on the pin connection, but pin connection's VARREF 'cfg_addr' generates 8 bits.
+                                                      : ... note: In instance 'cache_system_tl_top.cache_inst'
+   82 |                  .in_addr                               (cfg_addr),
+      |                   ^~~~~~~
+%Warning-WIDTHTRUNC: ../rtl_2/main_memory_bram.v:26:43: Operator ASSIGNW expects 16 bits on the Assign RHS, but Assign RHS's MODDIV generates 32 or 30 bits.
+                                                      : ... note: In instance 'cache_system_tl_top.dram_inst'
+   26 |     wire [$clog2(MEM_DEPTH)-1 : 0] r_addr = read_addr[ADDR_SIZE-1 : 2] % MEM_DEPTH;
+      |                                           ^
+%Warning-WIDTHTRUNC: ../rtl_2/main_memory_bram.v:27:43: Operator ASSIGNW expects 16 bits on the Assign RHS, but Assign RHS's MODDIV generates 32 or 30 bits.
+                                                      : ... note: In instance 'cache_system_tl_top.dram_inst'
+   27 |     wire [$clog2(MEM_DEPTH)-1 : 0] w_addr = write_addr[ADDR_SIZE-1 : 2] % MEM_DEPTH;
+      |                                           ^
+%Warning-CASEINCOMPLETE: ../rtl_2/cam_bram.v:154:5: Case values incompletely covered (example pattern 0x6)
+                                                  : ... note: In instance 'cache_system_tl_top.cache_inst'
+  154 |     case (state_reg)
+      |     ^~~~
+                         ... For warning description see https://verilator.org/warn/CASEINCOMPLETE?v=5.036
+                         ... Use "/* verilator lint_off CASEINCOMPLETE */" and lint_on around source to disable this message.
+%Warning-COMBDLY: ../rtl_2/cam_bram.v:124:38: Non-blocking assignment '<=' in combinational logic process
+                                            : ... note: In instance 'cache_system_tl_top.cache_inst'
+                                            : ... This will be executed as a blocking assignment '='!
+  124 |             match_raw_out[slice_ind] <= match_data;
+      |                                      ^~
+                  ... For warning description see https://verilator.org/warn/COMBDLY?v=5.036
+                  ... Use "/* verilator lint_off COMBDLY */" and lint_on around source to disable this message.
+                  *** See https://verilator.org/warn/COMBDLY?v=5.036 before disabling this,
+                  else you may end up with different sim results.
+- V e r i l a t i o n   R e p o r t: Verilator 5.036 2025-04-27 rev v5.036
+- Verilator: Built from 2.144 MB sources in 30 modules, into 7.836 MB in 35 C++ files needing 0.008 MB
+- Verilator: Walltime 1.378 s (elab=0.091, cvt=1.201, bld=0.000); cpu 1.377 s on 1 threads; alloced 77.109 MB
+make -C sim_build  -f Vtop.mk
+make[2]: Entering directory '/data/namcv10/N-Way_Cache_modify/sim/sim_build'
+g++  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -Os  -c -o verilator.o /usr/local/lib/python3.10/dist-packages/cocotb/share/lib/verilator/verilator.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated.o /usr/local/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_dpi.o /usr/local/share/verilator/include/verilated_dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vpi.o /usr/local/share/verilator/include/verilated_vpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_vcd_c.o /usr/local/share/verilator/include/verilated_vcd_c.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -c -o verilated_threads.o /usr/local/share/verilator/include/verilated_threads.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -x c++-header Vtop__pch.h -o Vtop__pch.h.fast.gch
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop.o Vtop.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop___024root__DepSet_h84412442__0.o Vtop___024root__DepSet_h84412442__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop___024root__DepSet_heccd7ead__0.o Vtop___024root__DepSet_heccd7ead__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_cache_system_tl_top__DepSet_hd5b1bb39__0.o Vtop_cache_system_tl_top__DepSet_hd5b1bb39__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_cache_system_tl_top__DepSet_h1cfd07e4__0.o Vtop_cache_system_tl_top__DepSet_h1cfd07e4__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_cache_controller__pi1__DepSet_hddd6781b__0.o Vtop_cache_controller__pi1__DepSet_hddd6781b__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_cache_controller__pi1__DepSet_hddd6781b__1.o Vtop_cache_controller__pi1__DepSet_hddd6781b__1.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_cache_controller__pi1__DepSet_h155c4b06__0.o Vtop_cache_controller__pi1__DepSet_h155c4b06__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__0.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__1.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__1.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__2.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__2.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__3.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__3.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__4.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__4.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__5.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__5.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop_mem_model__M200_MB40__DepSet_h80d4cb54__0.o Vtop_mem_model__M200_MB40__DepSet_h80d4cb54__0.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop__Dpi.o Vtop__Dpi.cpp
+g++ -Os  -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.fast -c -o Vtop__Trace__0.o Vtop__Trace__0.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -x c++-header Vtop__pch.h -o Vtop__pch.h.slow.gch
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop__ConstPool_0.o Vtop__ConstPool_0.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop___024root__Slow.o Vtop___024root__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop___024root__DepSet_h84412442__0__Slow.o Vtop___024root__DepSet_h84412442__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop___024root__DepSet_heccd7ead__0__Slow.o Vtop___024root__DepSet_heccd7ead__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_cache_system_tl_top__Slow.o Vtop_cache_system_tl_top__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_cache_system_tl_top__DepSet_h1cfd07e4__0__Slow.o Vtop_cache_system_tl_top__DepSet_h1cfd07e4__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_cache_controller__pi1__Slow.o Vtop_cache_controller__pi1__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_cache_controller__pi1__DepSet_hddd6781b__0__Slow.o Vtop_cache_controller__pi1__DepSet_hddd6781b__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_cache_controller__pi1__DepSet_h155c4b06__0__Slow.o Vtop_cache_controller__pi1__DepSet_h155c4b06__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_tl_pkg__Slow.o Vtop_tl_pkg__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_tl_pkg__DepSet_h1525744d__0__Slow.o Vtop_tl_pkg__DepSet_h1525744d__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_tag_array__T80000_DB40_N10__Slow.o Vtop_tag_array__T80000_DB40_N10__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__0__Slow.o Vtop_tag_array__T80000_DB40_N10__DepSet_hcd7fbeb5__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_mem_model__M200_MB40__Slow.o Vtop_mem_model__M200_MB40__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop_mem_model__M200_MB40__DepSet_h80d4cb54__0__Slow.o Vtop_mem_model__M200_MB40__DepSet_h80d4cb54__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop__Syms.o Vtop__Syms.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop__Trace__0__Slow.o Vtop__Trace__0__Slow.cpp
+g++   -I.  -MMD -I/usr/local/share/verilator/include -I/usr/local/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=0 -DVM_TRACE=1 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=1 -DVM_TRACE_SAIF=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-shadow -Wno-sign-compare -Wno-subobject-linkage -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable      -include Vtop__pch.h.slow -c -o Vtop__TraceDecls__0__Slow.o Vtop__TraceDecls__0__Slow.cpp
+echo "" > Vtop__ALL.verilator_deplist.tmp
+g++    verilator.o verilated.o verilated_dpi.o verilated_vpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a   -Wl,-rpath,/usr/local/lib/python3.10/dist-packages/cocotb/libs -L/usr/local/lib/python3.10/dist-packages/cocotb/libs -lcocotbvpi_verilator  -pthread -lpthread -latomic   -o Vtop
+rm Vtop__ALL.verilator_deplist.tmp
+make[2]: Leaving directory '/data/namcv10/N-Way_Cache_modify/sim/sim_build'
+/usr/local/lib/python3.10/dist-packages/cocotb_tools/makefiles/simulators/Makefile.verilator:69: Using MODULE is deprecated, please use COCOTB_TEST_MODULES instead.
+rm -f results.xml
+COCOTB_TEST_MODULES=test_cache_tl_top COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=cache_system_tl_top TOPLEVEL_LANG=verilog \
+         sim_build/Vtop  -Wno-fatal --timing --trace --trace-structs -GNUM_WAYS=16 -DMULTIWAY   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.10.14 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Verilator version 5.036 2025-04-27
+     0.00ns INFO     cocotb                             Seeding Python random module with 1789015400
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /usr/local/lib/python3.10/dist-packages/cocotb
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_cache_tl_top.test_tl_workload1_sequential_streaming (1/2)
+                                                            Measure TileLink baseline on sequential streaming: 64 words across 4 consecutive 64B lines.
+    60.00ns INFO     cocotb.cache_system_tl_top         =============================================================================
+    60.00ns INFO     cocotb.cache_system_tl_top          RUNNING TILELINK WORKLOAD 1: SEQUENTIAL STREAMING READS (64 WORDS / 4 LINES)
+    60.00ns INFO     cocotb.cache_system_tl_top         =============================================================================
+  5540.00ns INFO     cocotb.cache_system_tl_top         
+                                                        =====================================================================================
+  5540.00ns INFO     cocotb.cache_system_tl_top          HARDWARE PERFORMANCE MEASUREMENT REPORT: TILELINK WORKLOAD 1: SEQUENTIAL READS
+  5540.00ns INFO     cocotb.cache_system_tl_top         =====================================================================================
+  5540.00ns INFO     cocotb.cache_system_tl_top          1. TILELINK CPU/ARA INTERFACE METRICS (clk_h 100MHz domain):
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Total TileLink Requests        : 64 requests
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Overall Cache Hits / Misses    : 60 Hits | 4 Misses
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Overall Hit Rate               : 93.75%
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Read Requests (Hits / Misses)  : 64 (Hits: 60, Misses: 4)
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Read Hit Rate                  : 93.75%
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Average Read Hit Latency       : 4.00 cycles (clk_h)
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Average Read Miss Latency      : 40.25 cycles (clk_h)
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Write Requests (Hits / Misses) : 0 (Hits: 0, Misses: 0)
+  5540.00ns INFO     cocotb.cache_system_tl_top         -------------------------------------------------------------------------------------
+  5540.00ns INFO     cocotb.cache_system_tl_top          2. DRAM BUS ACTIVITY (64B Line / Full Dirty Line Eviction):
+  5540.00ns INFO     cocotb.cache_system_tl_top             - 64-Byte Lines Refilled from DRAM: 4 lines
+  5540.00ns INFO     cocotb.cache_system_tl_top             - DRAM Read Beats Received       : 64 beats (256 bytes)
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Dirty Lines Evicted to DRAM    : 0 lines
+  5540.00ns INFO     cocotb.cache_system_tl_top             - DRAM Write Flush Beats Emitted : 0 beats (0 bytes)
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Total Off-Chip DRAM Traffic    : 256 bytes
+  5540.00ns INFO     cocotb.cache_system_tl_top             - Total DRAM Bus Active Time     : 1280 ns (@ 50 MHz clk_l)
+  5540.00ns INFO     cocotb.cache_system_tl_top         =====================================================================================
+  5540.00ns INFO     cocotb.regression                  test_cache_tl_top.test_tl_workload1_sequential_streaming passed
+  5540.00ns INFO     cocotb.regression                  running test_cache_tl_top.test_tl_workload2_subword_writes_with_eviction (2/2)
+                                                            Measure TileLink baseline on byte stores (PutPartialData) and 16-way evictions.
+  5600.00ns INFO     cocotb.cache_system_tl_top         =============================================================================
+  5600.00ns INFO     cocotb.cache_system_tl_top          RUNNING TILELINK WORKLOAD 2: SUB-WORD STORES WITH 16-WAY EVICTIONS
+  5600.00ns INFO     cocotb.cache_system_tl_top         =============================================================================
+ 16320.00ns INFO     cocotb.cache_system_tl_top         
+                                                        =====================================================================================
+ 16320.00ns INFO     cocotb.cache_system_tl_top          HARDWARE PERFORMANCE MEASUREMENT REPORT: TILELINK WORKLOAD 2: SUB-WORD STORES & EVICTIONS
+ 16320.00ns INFO     cocotb.cache_system_tl_top         =====================================================================================
+ 16320.00ns INFO     cocotb.cache_system_tl_top          1. TILELINK CPU/ARA INTERFACE METRICS (clk_h 100MHz domain):
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Total TileLink Requests        : 20 requests
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Overall Cache Hits / Misses    : 0 Hits | 20 Misses
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Overall Hit Rate               : 0.00%
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Read Requests (Hits / Misses)  : 0 (Hits: 0, Misses: 0)
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Read Hit Rate                  : 0.00%
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Average Read Hit Latency       : 0.00 cycles (clk_h)
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Average Read Miss Latency      : 0.00 cycles (clk_h)
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Write Requests (Hits / Misses) : 20 (Hits: 0, Misses: 20)
+ 16320.00ns INFO     cocotb.cache_system_tl_top         -------------------------------------------------------------------------------------
+ 16320.00ns INFO     cocotb.cache_system_tl_top          2. DRAM BUS ACTIVITY (64B Line / Full Dirty Line Eviction):
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - 64-Byte Lines Refilled from DRAM: 20 lines
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - DRAM Read Beats Received       : 320 beats (1280 bytes)
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Dirty Lines Evicted to DRAM    : 8 lines
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - DRAM Write Flush Beats Emitted : 68 beats (272 bytes)
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Total Off-Chip DRAM Traffic    : 1552 bytes
+ 16320.00ns INFO     cocotb.cache_system_tl_top             - Total DRAM Bus Active Time     : 7760 ns (@ 50 MHz clk_l)
+ 16320.00ns INFO     cocotb.cache_system_tl_top         =====================================================================================
+ 16320.00ns INFO     cocotb.regression                  test_cache_tl_top.test_tl_workload2_subword_writes_with_eviction passed
+ 16320.00ns INFO     cocotb.regression                  **************************************************************************************************************************
+                                                        ** TEST                                                              STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************************************************
+                                                        ** test_cache_tl_top.test_tl_workload1_sequential_streaming           PASS        5540.00           0.38      14460.50  **
+                                                        ** test_cache_tl_top.test_tl_workload2_subword_writes_with_eviction   PASS       10780.00           0.04     279807.15  **
+                                                        **************************************************************************************************************************
+                                                        ** TESTS=2 PASS=2 FAIL=0 SKIP=0                                                  16320.00           0.42      38450.70  **
+                                                        **************************************************************************************************************************
+- :0: Verilog $finish
+make[1]: Leaving directory '/data/namcv10/N-Way_Cache_modify/sim'

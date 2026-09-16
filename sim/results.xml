@@ -1,0 +1,12 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1789115367" />
+    <testcase name="test_tl_workload1_sequential_streaming" classname="test_cache_tl_top" file="/data/namcv10/N-Way_Cache_modify/sim/test_cache_tl_top.py" lineno="345" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_tl_workload2_subword_writes_with_eviction" classname="test_cache_tl_top" file="/data/namcv10/N-Way_Cache_modify/sim/test_cache_tl_top.py" lineno="375" time="0" sim_time_ns="0" ratio_time="0">
+      <skipped />
+    </testcase>
+    <testcase name="test_tl_workload3_ara_vector_burst_stall" classname="test_cache_tl_top" file="/data/namcv10/N-Way_Cache_modify/sim/test_cache_tl_top.py" lineno="425" time="0.3764050006866455" sim_time_ns="1560.0" ratio_time="4144.472037178616" />
+  </testsuite>
+</testsuites>
