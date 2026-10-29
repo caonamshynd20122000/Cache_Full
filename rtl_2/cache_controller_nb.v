@@ -1,47 +1,86 @@
 // ============================================================================
 // File: cache_controller_nb.v
-// Description: Non-Blocking L2 Cache Controller with Integrated MSHR
+// Module: cache_controller_nb
+// Description: Non-Blocking Set-Associative L2 Cache Controller with Integrated MSHR
 // Architecture:
-//   - Decoupled Hit pipeline (fsm_nb) & Miss background refill (tl_mshr)
-//   - Direct tag_array.fsm_accessed binding to eliminate latency skew
-//   - Clean CDC single-cycle pulse generator on req_done
-//   - Filtered Read-only MSHR allocation preventing write leaks
-//   - Out-of-Order Channel D Arbiter with accurate word-level extraction
+//   - Decoupled Hit Pipeline (fsm_nb) & Background Miss Refill (tl_mshr)
+//   - Hardware-level Hit-under-Miss out-of-order execution
+//   - Direct tag_array.fsm_accessed synchronization to eliminate latency skew
+//   - CDC single-cycle pulse generator on req_done (clk_l -> clk_h)
+//   - Read-only MSHR allocation filter preventing write tracking leakage
+//   - Out-of-Order TileLink Channel D Arbiter with word-level extraction
 // ============================================================================
 
 `timescale 1ns / 100ps
 
+// ============================================================================
+// Terminal / CLI Macro Definitions for Dynamic Parameter Overrides
+// Use compiler flags from CLI: e.g. -DCFG_TOTAL_SIZE=262144 -DCFG_NUM_WAYS=8
+// ============================================================================
+`ifndef CFG_TOTAL_SIZE
+    `define CFG_TOTAL_SIZE 262144        // Default: 32 KiB (262,144 bits)
+`endif
+
+`ifndef CFG_NUM_WAYS
+    `define CFG_NUM_WAYS 8               // Default: 8-Way Set-Associative
+`endif
+
+`ifndef CFG_MSHR_SIZE
+    `define CFG_MSHR_SIZE 8              // Default: 8 MSHRs (Matching spec)
+`endif
+
+`ifndef CFG_DATA_ELEMENTS
+    `define CFG_DATA_ELEMENTS 64         // Default: 64 Bytes per line (16 words)
+`endif
+
+`ifndef CFG_LATENCY
+    `define CFG_LATENCY 2                // Default: 2-cycle BRAM read latency
+`endif
+
+`ifndef CFG_BOUND_SIZE
+    `define CFG_BOUND_SIZE 4             // Default: 4-bit security address bounds
+`endif
+
 module cache_controller_nb #(
-    parameter   TOTAL_SIZE             = 524288,
+    // ------------------------------------------------------------------------
+    // Top-Level Configurable Parameters (Overridable via CLI Macros)
+    // ------------------------------------------------------------------------
+    parameter   TOTAL_SIZE             = `CFG_TOTAL_SIZE,
     parameter   ADDR_SIZE              = 32,
     parameter   DATA_SIZE              = 32,
-    parameter   DATA_ELEMENTS          = 64,
+    parameter   DATA_ELEMENTS          = `CFG_DATA_ELEMENTS,
     localparam  SIZE                   = 4,
-    parameter   LATENCY                = 2,
-    parameter   BOUND_SIZE             = 4,
+    parameter   LATENCY                = `CFG_LATENCY,
+    parameter   BOUND_SIZE             = `CFG_BOUND_SIZE,
     localparam  QUEUE_SIZE             = 0,
-    parameter   NUM_WAYS               = 16,
+    parameter   NUM_WAYS               = `CFG_NUM_WAYS,
+    parameter   MSHR_SIZE              = `CFG_MSHR_SIZE,
     localparam  SET_REPLACEMENT_POLICY = "NMRU",
-    localparam  _BLOCK_SIZE            = DATA_ELEMENTS * 8,
-    localparam  _NUM_LINES             = TOTAL_SIZE / _BLOCK_SIZE / NUM_WAYS,
-    localparam  _OFFSET_BITS           = $clog2(DATA_ELEMENTS),
-    localparam  _LINE_BITS             = $clog2(_NUM_LINES),
-    localparam  _TAG_BITS              = ADDR_SIZE - _LINE_BITS - _OFFSET_BITS,
-    localparam  _NUM_TRANSFER          = _BLOCK_SIZE / DATA_SIZE,
+
+    // ------------------------------------------------------------------------
+    // Derived Architectural Geometry and Bit-Widths
+    // ------------------------------------------------------------------------
+    localparam  _BLOCK_SIZE            = DATA_ELEMENTS * 8,                     // Block size in bits (512 bits)
+    localparam  _NUM_LINES             = TOTAL_SIZE / _BLOCK_SIZE / NUM_WAYS,   // Number of sets (64 sets)
+    localparam  _OFFSET_BITS           = $clog2(DATA_ELEMENTS),                 // Block byte offset (6 bits)
+    localparam  _LINE_BITS             = $clog2(_NUM_LINES),                    // Set index bits (6 bits)
+    localparam  _TAG_BITS              = ADDR_SIZE - _LINE_BITS - _OFFSET_BITS, // Tag bits (20 bits)
+    localparam  _NUM_TRANSFER          = _BLOCK_SIZE / DATA_SIZE,               // Beats per refill (16 beats)
     localparam  _TRANSFER_BITS         = (_NUM_TRANSFER > 1) ? $clog2(_NUM_TRANSFER) : 1
 ) (
-    input wire                                          clk_h,
-    input wire                                          clk_l,
-    input wire                                          rst_n,
+    // Clock and Reset
+    input wire                                          clk_h,      // High-speed Cache/Core clock (e.g. 100 MHz)
+    input wire                                          clk_l,      // Downstream Memory/DRAM clock (e.g. 50 MHz)
+    input wire                                          rst_n,      // Active-low asynchronous reset
 
-    // Configuration ports
+    // Memory-Mapped Configuration Port
     input wire  [7 : 0]                                 cfg_addr,
     input wire  [31 : 0]                                cfg_data_in,
     output wire [31 : 0]                                cfg_data_out,
     input wire                                          cfg_valid,
     output wire                                         cfg_ready,
 
-    // TileLink Interface
+    // Upstream TileLink Channel A Interface (Request Path)
     input wire  [ADDR_SIZE-1 : 0]                       in_addr,
     input wire  [DATA_SIZE-1 : 0]                       in_data,
     input wire  [(DATA_SIZE/8)-1 : 0]                   in_byteen,
@@ -51,6 +90,7 @@ module cache_controller_nb #(
     input wire                                          in_write,
     output wire                                         in_ready,
 
+    // Upstream TileLink Channel D Interface (Response Path)
     output wire [ADDR_SIZE-1 : 0]                       out_addr,
     output wire [DATA_SIZE-1 : 0]                       out_data,
     output wire [3 : 0]                                 out_source,
@@ -58,17 +98,20 @@ module cache_controller_nb #(
     output wire                                         out_valid,
     input wire                                          out_ready,
 
-    // Downstream DRAM ports
+    // Downstream DRAM Read Channel (Memory Refill Path)
     output wire [ADDR_SIZE-1 : 0]                       read_addr,
     input wire  [DATA_SIZE-1 : 0]                       read_data,
     output wire                                         read_valid,
     input wire                                          read_ready,
 
+    // Downstream DRAM Write Channel (Memory Eviction / Writeback Path)
     output wire [ADDR_SIZE-1 : 0]                       write_addr,
     output wire [DATA_SIZE-1 : 0]                       write_data,
     output wire [(DATA_SIZE/8)-1 : 0]                   write_byteen,
     output wire                                         write_valid,
-    input wire                                          write_ready
+    input wire                                          write_ready,
+
+    output wire                                         perf_miss
 );
 
 `ifdef MULTIWAY
@@ -76,6 +119,12 @@ module cache_controller_nb #(
     wire [_WAY_BITS-1 : 0] fsm_way;
 `endif
 
+    // Dynamic width for MSHR entry indices
+    localparam MSHR_ADDR_W = $clog2(MSHR_SIZE);
+
+    // ========================================================================
+    // 1. Configuration & Security Register File
+    // ========================================================================
     wire write_through;
     wire prefetch;
     wire secure_request;
@@ -102,7 +151,7 @@ module cache_controller_nb #(
     );
 
     // ========================================================================
-    // DRAM Read & Write Subsystems
+    // 2. Downstream DRAM Read & Write Subsystems
     // ========================================================================
     wire [ADDR_SIZE-1 : 0]   req_addr;
     wire [_BLOCK_SIZE-1 : 0] req_data;
@@ -110,6 +159,7 @@ module cache_controller_nb #(
     wire                     req_done;
     wire                     req_ready;
 
+    // Handles multi-beat bursting of 64-byte lines from DRAM
     read_controller #(
         .ADDR_SIZE              (ADDR_SIZE),
         .DATA_SIZE              (DATA_SIZE),
@@ -140,6 +190,7 @@ module cache_controller_nb #(
     wire [_NUM_TRANSFER-1 : 0] cache_write_strb;
     wire                     cache_write_ready;
 
+    // Handles multi-beat dirty line flushes and writebacks to DRAM
     write_controller #(
         .ADDR_SIZE              (ADDR_SIZE),
         .DATA_SIZE              (DATA_SIZE),
@@ -166,7 +217,8 @@ module cache_controller_nb #(
     );
 
     // ========================================================================
-    // CDC Single-Cycle Pulse Generator on req_done
+    // 3. Clock Domain Crossing (CDC) Single-Cycle Pulse Generator
+    // Synchronizes the 50 MHz clk_l req_done pulse into the 100 MHz clk_h domain
     // ========================================================================
     reg req_done_sync_0, req_done_sync_1, req_done_sync_2;
     always @(posedge clk_h or negedge rst_n) begin
@@ -183,7 +235,7 @@ module cache_controller_nb #(
     wire req_done_pulse = req_done_sync_1 && !req_done_sync_2;
 
     // ========================================================================
-    // SRAM Array Interconnect Signals
+    // 4. SRAM Interconnect Signals and Fetch Unit
     // ========================================================================
     wire [ADDR_SIZE-1 : 0]   fsm_addr;
     wire [DATA_SIZE-1 : 0]   fsm_data;
@@ -205,6 +257,7 @@ module cache_controller_nb #(
     wire                     trans_valid;
     wire                     trans_done;
 
+    // Fetch and prefetch management unit
     fetch_unit #(
         .TOTAL_SIZE             (TOTAL_SIZE),
         .ADDR_SIZE              (ADDR_SIZE),
@@ -241,7 +294,7 @@ module cache_controller_nb #(
     );
 
     // ========================================================================
-    // Non-Blocking FSM & MSHR Pipeline
+    // 5. Non-Blocking Pipeline & MSHR Tracking Subsystem
     // ========================================================================
     wire                     fsm_in_ready;
     wire [ADDR_SIZE-1 : 0]   fsm_out_addr;
@@ -253,35 +306,38 @@ module cache_controller_nb #(
 
     wire                     mshr_fin_valid;
     wire                     mshr_fin_is_hit;
-    wire [1 : 0]             mshr_fin_id;
+    wire [MSHR_ADDR_W-1 : 0] mshr_fin_id;
     wire                     miss_trigger;
 
     wire                     mshr_alloc_ready;
-    wire [1:0]               mshr_alloc_id;
+    wire [MSHR_ADDR_W-1 : 0] mshr_alloc_id;
     wire                     mshr_alloc_match;
-    wire [1:0]               mshr_alloc_match_id;
+    wire [MSHR_ADDR_W-1 : 0] mshr_alloc_match_id;
 
     wire                     mshr_deq_valid;
+    wire                     mshr_deq_rw; 
     wire [3:0]               mshr_deq_source;
     wire [2:0]               mshr_deq_opcode;
     wire [ADDR_SIZE-1:0]     mshr_deq_addr;
     wire [DATA_SIZE-1:0]     mshr_deq_data;
-    wire [1:0]               mshr_deq_id;
+    wire [MSHR_ADDR_W-1 : 0] mshr_deq_id;
     wire                     mshr_deq_ready;
 
-    // Filter MSHR allocation: allocate ONLY for reads to prevent write leaks
-    wire mshr_do_alloc = in_valid && in_ready && (!in_write);
+    // Filter MSHR allocation: allocate ONLY for reads to prevent write tracking leak
+    // wire mshr_do_alloc = in_valid && in_ready && (!in_write);
+    wire mshr_do_alloc = in_valid && in_ready;
 
     // Track MSHR slot associated with the currently in-flight DRAM miss
-    reg  [1:0] miss_mshr_id;
+    reg  [MSHR_ADDR_W-1 : 0] miss_mshr_id;
     always @(posedge clk_h or negedge rst_n) begin
         if (!rst_n) begin
-            miss_mshr_id <= 2'b00;
+            miss_mshr_id <= '0;
         end else if (mshr_fin_valid && !mshr_fin_is_hit) begin
             miss_mshr_id <= mshr_fin_id;
         end
     end
 
+    // Fast-path Hit Pipeline Controller
     fsm_nb #(
         .ADDR_SIZE              (ADDR_SIZE),
         .DATA_SIZE              (DATA_SIZE),
@@ -316,7 +372,7 @@ module cache_controller_nb #(
         .ib_data                (arr_data),
         .ib_valid               (fsm_hit),
         .ib_ready               (),
-        // Direct wiring from tag_array:
+        // Direct synchronization from tag_array:
         .fsm_accessed           (fsm_accessed),
         .fsm_hit                (fsm_hit),
         .mshr_fin_valid         (mshr_fin_valid),
@@ -325,16 +381,18 @@ module cache_controller_nb #(
         .miss_trigger           (miss_trigger)
     );
 
+    // Non-Blocking Miss Status Holding Register (MSHR) Array
     tl_mshr #(
-        .MSHR_SIZE              (4),
+        .MSHR_SIZE              (MSHR_SIZE),
         .ADDR_SIZE              (ADDR_SIZE),
         .DATA_SIZE              (DATA_SIZE),
         .SOURCE_WIDTH           (4),
-        .LINE_OFFSET_BITS       (6)
+        .LINE_OFFSET_BITS       (_OFFSET_BITS)
     ) mshr_inst (
         .clk                    (clk_h),
         .rst_n                  (rst_n),
         .alloc_valid            (mshr_do_alloc),
+        .alloc_rw               (in_write),
         .alloc_addr             (in_addr),
         .alloc_source           (in_source),
         .alloc_opcode           (in_opcode),
@@ -348,11 +406,12 @@ module cache_controller_nb #(
         .fin_id                 (mshr_fin_id),
         .fin_is_hit             (mshr_fin_is_hit),
         .fin_is_coalesced       (1'b0),
-        .fin_prev_id            (2'b00),
+        .fin_prev_id            ({MSHR_ADDR_W{1'b0}}),
         .fill_valid             (req_done_pulse),
         .fill_id                (miss_mshr_id),
         .fill_addr              (),
         .deq_valid              (mshr_deq_valid),
+        .deq_rw                 (mshr_deq_rw),
         .deq_ready              (mshr_deq_ready),
         .deq_source             (mshr_deq_source),
         .deq_opcode             (mshr_deq_opcode),
@@ -365,7 +424,8 @@ module cache_controller_nb #(
     );
 
     // ========================================================================
-    // Out-of-Order Channel D Response Arbiter (Hits First, DRAM Refills Second)
+    // 6. Out-of-Order Channel D Response Arbiter
+    // Priority: Fast-path Hits (fsm_out) > Background DRAM Refills (mshr_deq)
     // ========================================================================
     wire hit_out_valid    = fsm_out_valid;
     wire refill_out_valid = mshr_deq_valid;
@@ -380,16 +440,17 @@ module cache_controller_nb #(
     assign out_source     = hit_out_valid ? fsm_out_source : mshr_deq_source;
     assign out_opcode     = hit_out_valid ? fsm_out_opcode : mshr_deq_opcode;
 
+    // Backpressure handshakes
     assign fsm_out_ready  = hit_out_valid ? out_ready : 1'b0;
     assign mshr_deq_ready = (!hit_out_valid && refill_out_valid) ? out_ready : 1'b0;
 
-    // Controller accept condition: FSM ready and MSHR available (if read)
+    // Controller input acceptance condition: Ready if FSM is idle and MSHR has space (for reads)
     assign in_ready       = fsm_in_ready && (in_write || mshr_alloc_ready);
 
     // ========================================================================
-    // SRAM Arrays Instantiations
+    // 7. SRAM Tag and Data Arrays Instantiation
     // ========================================================================
-    tag_array #(
+    custom_tag_array #(
         .TOTAL_SIZE             (TOTAL_SIZE),
         .ADDR_SIZE              (ADDR_SIZE),
         .DATA_SIZE              (DATA_SIZE),
@@ -426,20 +487,22 @@ module cache_controller_nb #(
     );
 
     wire [_BLOCK_SIZE-1 : 0] data;
-    wire valid = return_valid | (fsm_rw && fsm_hit) | fsm_valid;
+    wire valid     = return_valid | (fsm_rw && fsm_hit) | fsm_valid;
     wire [ADDR_SIZE-1 : 0] addr = return_valid ? return_addr : fsm_addr;
-    wire write = fsm_rw && fsm_hit;
+    wire write     = fsm_rw && fsm_hit;
     wire write_all = return_valid;
 
+    // Latch byte-enable mask to avoid multi-cycle DRAM fetch latency signal drop
     reg [(DATA_SIZE/8)-1 : 0] byteen_keep;
     always @(posedge clk_h or negedge rst_n) begin
-        if(!rst_n) begin
+        if (!rst_n) begin
             byteen_keep <= {(DATA_SIZE/8){1'b0}};
-        end else if(in_valid && in_ready) begin
+        end else if (in_valid && in_ready) begin
             byteen_keep <= in_byteen;
         end
     end
 
+    // Sub-word byte merging datapath for Write-Allocate line refills
     wire [_TRANSFER_BITS-1 : 0] fsm_word_idx = fsm_addr[_OFFSET_BITS-1 : _OFFSET_BITS - _TRANSFER_BITS];
 
     genvar w, b;
@@ -457,6 +520,7 @@ module cache_controller_nb #(
         end
     endgenerate
 
+    // Multi-way Data Storage Array
     data_array #(
         .TOTAL_SIZE             (TOTAL_SIZE),
         .ADDR_SIZE              (ADDR_SIZE),
@@ -481,6 +545,9 @@ module cache_controller_nb #(
         .out_data               (arr_data)
     );
 
+    // ========================================================================
+    // 8. Security Subsystem: Random Address Translation Engine
+    // ========================================================================
     secure_address_translator #(
         .BOUND_SIZE             (BOUND_SIZE),
         .ADDR_SIZE              (ADDR_SIZE)
@@ -498,5 +565,17 @@ module cache_controller_nb #(
         .in_ready               (),
         .in_done                (trans_done)
     );
+
+  // ==========================================================================
+  // PIPELINE TELEMETRY PROBE (Definitive Root-Cause Tracker)
+  // ==========================================================================
+  always @(posedge clk_h) begin
+    if (fsm_valid || (c_fsm.cur_state != 0) || req_valid || req_done || mshr_inst.deq_valid) begin
+      $display("[PIPE_TRACE] t=%0t | FSM_state=%0d hit=%b acc=%b | f_req_v=%b f_req_done=%b | mshr_fill=%b deq_v=%b | out_v=%b",
+               $time, c_fsm.cur_state, fsm_hit, fsm_accessed, req_valid, req_done, req_done_pulse, mshr_deq_valid, out_valid);
+    end
+  end
+
+assign perf_miss = miss_trigger;
 
 endmodule: cache_controller_nb

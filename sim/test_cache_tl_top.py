@@ -1,9 +1,9 @@
 # ==============================================================================
-# Cocotb Testbench for TileLink-C L2 Cache Subsystem
+# Cocotb Testbench for TileLink-C L2 Cache Subsystem (1-1 Config: 8-Way, 32 KiB)
 # Standards: SiFive TileLink Spec v1.8.1 (Decoupled Handshake & Latency Profiling)
 # Features:
 #   - Workload 1: Sequential Streaming Reads (64 words / 4 lines)
-#   - Workload 2: Sub-word Stores with 16-way Evictions
+#   - Workload 2: Sub-word Stores with 8-way Evictions
 #   - Workload 3: True Pipelined Vector Burst (Concurrent Channel A & Channel D)
 #   - Auto-Watchdog Timeout with Hardware X-Ray Diagnostics
 # ==============================================================================
@@ -13,13 +13,13 @@ from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge, Timer
 
 # ==============================================================================
-# HARDWARE CONFIGURATION CONSTANTS
+# HARDWARE CONFIGURATION CONSTANTS (UPDATED FOR 1-1 SPEC: 8-WAY)
 # ==============================================================================
 DATA_SIZE = 32
 DATA_ELEMENTS = 64  # 64-byte cache line
-NUM_WAYS = 16
+NUM_WAYS = 8        # [ĐÃ SẢU] Hạ từ 16 xuống 8-Way khớp 1-1 với VtCPU
 LINE_BYTES = 64
-TAG_SHIFT = 12  # Set 0 address stride: (tag << 12)
+TAG_SHIFT = 12      # Set 0 address stride: (tag << 12)
 
 # TileLink Standard Opcodes (Ref: tl_pkg.sv & SiFive Spec)
 TL_A_PUT_FULL_DATA = 0
@@ -370,11 +370,11 @@ async def test_tl_workload1_sequential_streaming(dut):
 
 
 # ==============================================================================
-# BENCHMARK 2: SUB-WORD STORES WITH 16-WAY EVICTIONS
+# BENCHMARK 2: SUB-WORD STORES WITH 8-WAY EVICTIONS (UPDATED FOR 1-1)
 # ==============================================================================
 @cocotb.test()
 async def test_tl_workload2_subword_writes_with_eviction(dut):
-    """Measure TileLink on byte stores (PutPartialData) and 16-way evictions."""
+    """Measure TileLink on byte stores (PutPartialData) and 8-way evictions."""
     global tracker
     tracker = HardwarePerfTracker()
     await setup_dut(dut)
@@ -383,14 +383,14 @@ async def test_tl_workload2_subword_writes_with_eviction(dut):
         "============================================================================="
     )
     dut._log.info(
-        " RUNNING TILELINK WORKLOAD 2: SUB-WORD STORES WITH 16-WAY EVICTIONS"
+        " RUNNING TILELINK WORKLOAD 2: SUB-WORD STORES WITH 8-WAY EVICTIONS"
     )
     dut._log.info(
         "============================================================================="
     )
 
-    # 1. Store Byte across 16 ways in Set 0
-    for way in range(16):
+    # 1. Store Byte across 8 ways in Set 0 (Đã hạ từ 16 xuống 8)
+    for way in range(8):  # [ĐÃ SỬA] range(16) -> range(8)
         target_addr = (way << TAG_SHIFT) + 0x08
         await execute_tl_write(
             dut,
@@ -401,15 +401,15 @@ async def test_tl_workload2_subword_writes_with_eviction(dut):
         )
         await Timer(30, unit="ns")
 
-    # 2. Issue 4 new stores to force dirty line evictions
-    for tag in range(16, 20):
+    # 2. Issue new stores to force dirty line evictions
+    for tag in range(8, 12):
         thrash_addr = tag << TAG_SHIFT
         await execute_tl_write(
             dut,
             addr=thrash_addr,
             data=0x55555555,
             byteen=0x0F,
-            source_id=(tag % 16),
+            source_id=(tag % 8),
         )
         await Timer(400, unit="ns")
 

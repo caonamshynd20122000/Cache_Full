@@ -14,7 +14,7 @@
 class Vtop__Syms;
 class Vtop___024root;
 class VerilatedVcdC;
-class Vtop_cache_system_tl_top;
+class Vtop_mem_model__M200_MB40;
 class Vtop_tl_pkg;
 
 
@@ -64,8 +64,15 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop VL_NOT_FINAL : public VerilatedModel {
     // CELLS
     // Public to allow access to /* verilator public */ items.
     // Otherwise the application code can consider these internals.
-    Vtop_cache_system_tl_top* const cache_system_tl_top;
     Vtop_tl_pkg* const __PVT__tl_pkg;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__1__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__2__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__3__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__4__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__5__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__6__KET____DOT__data_array_inst;
+    Vtop_mem_model__M200_MB40* const __PVT__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__7__KET____DOT__data_array_inst;
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.

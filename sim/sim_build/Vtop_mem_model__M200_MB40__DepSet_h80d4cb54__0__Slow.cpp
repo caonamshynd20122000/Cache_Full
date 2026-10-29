@@ -7,8 +7,8 @@
 
 extern const VlWide<16>/*511:0*/ Vtop__ConstPool__CONST_h93e1b771_0;
 
-VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_static__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___eval_static__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array\n"); );
+VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_static__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___eval_static__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
@@ -46,8 +46,8 @@ VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_static__TOP__cache_system_tl_
         = Vtop__ConstPool__CONST_h93e1b771_0[0xfU];
 }
 
-VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_initial__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___eval_initial__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array\n"); );
+VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_initial__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___eval_initial__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
@@ -2164,6 +2164,71 @@ VL_ATTR_COLD void Vtop_mem_model__M200_MB40___eval_initial__TOP__cache_system_tl
         = Vtop__ConstPool__CONST_h93e1b771_0[0xfU];
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__init_bram_to_zero__DOT__ram_index = 0x40U;
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__regcea = 1U;
+}
+
+VL_ATTR_COLD void Vtop_mem_model__M200_MB40___stl_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___stl_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0\n"); );
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Body
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[1U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[1U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[2U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[2U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[3U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[3U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[4U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[4U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[5U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[5U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[6U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[6U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[7U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[7U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[8U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[8U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[9U] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[9U];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xaU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xaU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xbU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xbU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xcU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xcU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xdU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xdU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xeU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xeU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__douta[0xfU] 
+        = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xfU];
+    vlSelfRef.out_data[0U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0U];
+    vlSelfRef.out_data[1U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[1U];
+    vlSelfRef.out_data[2U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[2U];
+    vlSelfRef.out_data[3U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[3U];
+    vlSelfRef.out_data[4U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[4U];
+    vlSelfRef.out_data[5U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[5U];
+    vlSelfRef.out_data[6U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[6U];
+    vlSelfRef.out_data[7U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[7U];
+    vlSelfRef.out_data[8U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[8U];
+    vlSelfRef.out_data[9U] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[9U];
+    vlSelfRef.out_data[0xaU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xaU];
+    vlSelfRef.out_data[0xbU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xbU];
+    vlSelfRef.out_data[0xcU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xcU];
+    vlSelfRef.out_data[0xdU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xdU];
+    vlSelfRef.out_data[0xeU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xeU];
+    vlSelfRef.out_data[0xfU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xfU];
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__rsta 
+        = (1U & (~ (IData)(vlSelfRef.rst_n)));
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__clka 
+        = vlSelfRef.clk;
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__addra 
+        = vlSelfRef.in_addr;
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ena 
+        = vlSelfRef.en;
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__wea 
+        = vlSelfRef.wren;
 }
 
 VL_ATTR_COLD void Vtop_mem_model__M200_MB40___ctor_var_reset(Vtop_mem_model__M200_MB40* vlSelf) {

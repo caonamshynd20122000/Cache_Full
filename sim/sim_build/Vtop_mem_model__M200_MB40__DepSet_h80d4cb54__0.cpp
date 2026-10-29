@@ -5,8 +5,8 @@
 #include "Vtop__pch.h"
 #include "Vtop_mem_model__M200_MB40.h"
 
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0\n"); );
+VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
@@ -62,26 +62,19 @@ VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl
         = vlSelfRef.clk;
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__rsta 
         = (1U & (~ (IData)(vlSelfRef.rst_n)));
-}
-
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__1(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__1\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__addra 
         = vlSelfRef.in_addr;
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ena 
         = vlSelfRef.en;
+    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__wea 
+        = vlSelfRef.wren;
 }
 
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__2(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__2\n"); );
+VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__1(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__1\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__wea 
-        = vlSelfRef.wren;
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0U] 
         = vlSelfRef.in_data[0U];
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[1U] 
@@ -116,8 +109,8 @@ VL_INLINE_OPT void Vtop_mem_model__M200_MB40___ico_sequent__TOP__cache_system_tl
         = vlSelfRef.in_data[0xfU];
 }
 
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_sequent__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0\n"); );
+VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_sequent__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
@@ -1564,8 +1557,8 @@ VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_sequent__TOP__cache_system_tl
     vlSelfRef.out_data[0xfU] = vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__ram_data[0xfU];
 }
 
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__0\n"); );
+VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0(Vtop_mem_model__M200_MB40* vlSelf) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__DOT__cache_inst__DOT__d_array__DOT__g_data_ways__BRA__0__KET____DOT__data_array_inst__0\n"); );
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
@@ -1573,52 +1566,6 @@ VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_to
         = vlSelfRef.en;
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__addra 
         = vlSelfRef.in_addr;
-}
-
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__1(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__1\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
     vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__wea 
         = vlSelfRef.wren;
-}
-
-VL_INLINE_OPT void Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__2(Vtop_mem_model__M200_MB40* vlSelf) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+            Vtop_mem_model__M200_MB40___nba_comb__TOP__cache_system_tl_top__cache_inst__d_array__DOT__genblk4__BRA__0__KET____DOT__data_array__2\n"); );
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    auto& vlSelfRef = std::ref(*vlSelf).get();
-    // Body
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0U] 
-        = vlSelfRef.in_data[0U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[1U] 
-        = vlSelfRef.in_data[1U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[2U] 
-        = vlSelfRef.in_data[2U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[3U] 
-        = vlSelfRef.in_data[3U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[4U] 
-        = vlSelfRef.in_data[4U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[5U] 
-        = vlSelfRef.in_data[5U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[6U] 
-        = vlSelfRef.in_data[6U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[7U] 
-        = vlSelfRef.in_data[7U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[8U] 
-        = vlSelfRef.in_data[8U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[9U] 
-        = vlSelfRef.in_data[9U];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xaU] 
-        = vlSelfRef.in_data[0xaU];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xbU] 
-        = vlSelfRef.in_data[0xbU];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xcU] 
-        = vlSelfRef.in_data[0xcU];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xdU] 
-        = vlSelfRef.in_data[0xdU];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xeU] 
-        = vlSelfRef.in_data[0xeU];
-    vlSelfRef.genblk1__DOT__xilinx_single_port_ram_no_change__DOT__dina[0xfU] 
-        = vlSelfRef.in_data[0xfU];
 }

@@ -73,8 +73,10 @@ always @(posedge clk_l, negedge rst_n) begin
         all_beats_received <= 1'b0;
     end else if (cur_state == STATE_MEM_RD_WAIT) begin
         // Khi slot 15 đang nhận data thành công ở chu kỳ này:
-        if (data_slot_idx == _COUNT_LIMIT && mem_read_done)
+        if (counter_wire == _COUNT_LIMIT && mem_read_done)
             all_beats_received <= 1'b1;
+        else
+            all_beats_received <= 1'b0;
     end else begin
         all_beats_received <= 1'b0;
     end
@@ -117,5 +119,15 @@ always @* begin
         end
     endcase
 end
+
+  // ==========================================================================
+  // READ CONTROLLER HARDWARE PROBE
+  // ==========================================================================
+  always @(posedge clk_l) begin
+    if ((cur_state != 0) || cache_read_valid) begin
+      $display("[RD_CTRL] t=%0t | state=%0d | cnt=%0d | done_w=%b | mem_vld=%b mem_done=%b | all_recv=%b done_out=%b",
+               $time, cur_state, counter_wire, counter_done, mem_read_valid, mem_read_done, all_beats_received, cache_read_done);
+    end
+  end
 
 endmodule

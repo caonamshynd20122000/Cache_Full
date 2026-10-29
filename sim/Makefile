@@ -6,8 +6,8 @@
 SIM ?= verilator
 TOPLEVEL_LANG ?= verilog
 
-# Verilator Compilation Flags
-EXTRA_ARGS += -Wno-fatal --timing --trace --trace-structs -GNUM_WAYS=16 -DMULTIWAY
+# Verilator Compilation Flags (Đã cập nhật chuẩn 1-1: 8-Way, 8 MSHRs, 32 KiB)
+EXTRA_ARGS += -Wno-fatal --timing --trace --trace-structs -GNUM_WAYS=8 -GMSHR_SIZE=8 -GTOTAL_SIZE=262144 -DMULTIWAY
 
 # Directory Paths
 RTL_DIR = ../rtl_2
